@@ -1,0 +1,37 @@
++Panowie tutorial jak odpalić openCV
++
++1.Ściągamy najonowsze OpenCV (3.2.0)
++2. Rozpakowujemy
++
++Teraz zajmujemy się dodaniem ścieżki openCV do kompilera
++1. PPM na mój komputer
++2. Szukamy zaawansowane ustawienia systemu
++3. Zmienne środowiskowe
++//Teraz będę trochę zmieniał nazwy prawdopodobnie bo mam windows 7
++4. W boxie zmienne systemowe zaznaczamy zmienna o nazwie PATH
++5. Edytuj --> nowy --> wpisujemy ścieżke do rozpakowanego openCV do katalogu "C:\(...)\opencv\build\x64\vc14\bin"
++
++
++1.Startujemy visual studio 2017
++2. Wybieramy nowy projekt console application (trzeba zaznaczyć pusty projekt)
++3. Ściągamy mój plik test1.cpp z githuba
++4. Prawy przycisk myszy (PPM) na "Pliki Źródłowe"
++5. Dodaj istniejący element i dodajemy test1.cpp
++
++Teraz dodajemy linkery
++1. W menu u góry Widok --> szukamy "Menadżer właściwości" (będzie na dole albo w inne okna)
++2. PPM na Debug | x64 --> dodaj nowy projekt arkusza właściwości
++3. Doda się plik PropertySheet więc dwuklik na niego
++4. Zakładka VC++, 
++  4a. Rozwijamy przy wierszu "Katalogi wykonywalne" i wybieramy "edytuj". 
++      "Szukamy i dodajemy katalog bin "C:\(....)\opencv\build\x64\vc14\bin"
++  4b. To samo przy wierszu "Katalogi bibliteki" C:\(....)\opencv\build\x64\vc14\lib
++5. Rozwijamy liste C/C++ --> Ogólne
++  5a. Wiersz "Dodatkowe katalogi dołączenia". Dodajemy katalog "C:\(...)\opencv\build\include"
++6. Rozwijamy liste "Konsolidator" (Linker)
++  6a. W ogólnych "dodatkowe katalogi biblioteki" czyli dodajemy C:\(....)\opencv\build\x64\vc14\lib
++  6b. W zakładce "wejście" w wierszu "dodatkowe zależności" wpisujemy "opencv_world320d.lib" (bez "")
++
++Trzeba powtórzyć punkty 2-6 do Release | x64 z tym że w 6.b wpisujemy opencv_world320.lib (czyli to samo bez literki d na końcu)
++
++Pozdro !
