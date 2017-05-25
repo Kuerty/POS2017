@@ -4,7 +4,7 @@
 #include "opencv2/highgui/highgui.hpp"
 
 using namespace cv;
-using namespace std;
+using namespace std; //to jest namespae
 
 int main() {
 
