@@ -5,16 +5,14 @@ using namespace std;
 
 void kopiowanie_plikow()
 {
-	BOOL c = CopyFile((LPCTSTR) "sss.txt", (LPCTSTR)"ccc.txt", true);
+	const string file_to_copy = "C:\\...\\filename.ext"; // tutaj czekamy na stringi od Jana z pliku INI
+	const string file_copied = "C:\\...\\filename.ext";
+
+	BOOL c = CopyFile(file_to_copy.c_str(), file_copied.c_str(), true);
+
 	if (c == 0)
-		cout << "File could not be copied successfully " << c << "Last error " << GetLastError() << endl;
-		
-	else
-		cout << "file copied succesful" << endl;
+		cout << "File" << file_to_copy.c_str() << " could not be copied successfully " << " Last error " << GetLastError() << endl;
 
 	
 	
-	//CopyFile((LPCWSTR)"C:\\kod_visio.jpg", (LPCWSTR)"C:\\Users\\Michał\\Documents\\Visual Studio 2017\\Projects\\ConsoleApplication2",false);
-	//CopyFileA("C:\\kod_visio.jpg", "C:\\Users\\Michał\\Documents\\Visual Studio 2017\\Projects\\ConsoleApplication2", true);
-	//cin.get();
 }
