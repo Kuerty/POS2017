@@ -5,25 +5,32 @@ using namespace cv;
 
 
 void przetworzobraz(const string nazwa_obrazu) {
+	struct stat buf;
 
-	Mat image, image2;
+	if (stat(nazwa_obrazu.c_str(), &buf) != -1) {
 
-	image = imread(nazwa_obrazu, 1); //œcie¿ka obrazu
+		Mat image, image2;
 
-	vector<Mat> channels;
-	cvtColor(image, image, COLOR_BGR2YCrCb);
+		image = imread(nazwa_obrazu, 1); //œcie¿ka obrazu
 
-	split(image, channels);
-	equalizeHist(channels[0], channels[0]); //wyrównuje histogram sk³adowej Y (sk³adowa luminacji)
-	merge(channels, image2);
+		vector<Mat> channels;
+		cvtColor(image, image, COLOR_BGR2YCrCb);
 
-	cvtColor(image2, image2, CV_YCrCb2BGR);
+		split(image, channels);
+		equalizeHist(channels[0], channels[0]); //wyrównuje histogram sk³adowej Y (sk³adowa luminacji)
+		merge(channels, image2);
+
+		cvtColor(image2, image2, CV_YCrCb2BGR);
 
 
-	namedWindow("window2", CV_WINDOW_AUTOSIZE);
+		namedWindow("window2", CV_WINDOW_AUTOSIZE);
 
 
-	imshow("window2", image2);
+		imshow("window2", image2);
+	}
+	else
+	{
+		cout << nazwa_obrazu << " nie istnieje w katologu programu" << endl;
+	}
 	waitKey(0);
-
 }
