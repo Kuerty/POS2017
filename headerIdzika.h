@@ -9,4 +9,6 @@
 
 using namespace std;
 
+void kopiowanie_plikow();
+
 #endif 
