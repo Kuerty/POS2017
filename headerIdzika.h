@@ -2,7 +2,6 @@
 #define headerIdzika_h
 
 
-#include "stdafx.h"
 #include <iostream>
 #include <windows.h>
 #include<conio.h>
