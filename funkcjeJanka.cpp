@@ -1,5 +1,5 @@
 #include "hederJanka.h"
-//komentarz kamila
+
 
 int main(int argc, char * argv[])
 {
