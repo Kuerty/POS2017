@@ -6,7 +6,7 @@
 #include <vector>
 #include <Windows.h>
 
-void plik_ini();
+void plik_ini(const string sciezka_do_pliku_ini);
 
 class CIniReader
 {
