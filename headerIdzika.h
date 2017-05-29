@@ -10,5 +10,6 @@
 using namespace std;
 
 void kopiowanie_plikow();
+void kopiowanie_plikow_v2();
 
 #endif 

@@ -12,7 +12,16 @@ void kopiowanie_plikow()
 
 	if (c == 0)
 		cout << "File" << file_to_copy.c_str() << " could not be copied successfully " << " Last error " << GetLastError() << endl;
+}
 
-	
-	
+void kopiowanie_plikow_v2() {
+	BOOL b = CopyFileA("C:\\kod_visio.jpg", "C:\\Users\\Micha³\\Documents\\Visual Studio 2017\\Projects\\ConsoleApplication2\\kod_visio.jpg", TRUE);
+	if (!b) {
+		cout << "Error: " << GetLastError() << endl;
+	}
+	else {
+		cout << "Okay " << endl;
+	}
+
+	system("pause");
 }
