@@ -11,5 +11,6 @@ using namespace std;
 
 void kopiowanie_plikow();
 void kopiowanie_plikow_v2();
+void save_modified_picture(Mat picture);
 
 #endif 

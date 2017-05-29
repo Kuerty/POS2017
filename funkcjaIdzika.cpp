@@ -1,5 +1,5 @@
 #include "HeaderIdzika.h"
-
+#include "headerKamila.h"
 
 using namespace std;
 
@@ -22,4 +22,11 @@ void kopiowanie_plikow_v2() {
 	else {
 		cout << "Okay " << endl;
 	}
+}
+
+void save_modified_picture(Mat picture) {
+
+	imwrite("œcie¿ka docelowa pobrana z pliku ini", picture);
+	cout << "File saved" << endl;
+
 }
