@@ -2,8 +2,9 @@
 
 
 void plik_ini()
+
 {
-	CIniWriter iniWriter("D:\Paths.ini");
+	CIniWriter iniWriter("D:\\Paths.ini");
 	iniWriter.WriteString("Image", "Path1", "D:\\\Obrazy\\\gory.jpg");
 	iniWriter.WriteString("Image", "Path2", "D:\\\Obrazy\\\jesien.jpg");
 	iniWriter.WriteString("Image", "Path3", "D:\\\Obrazy\\\ksiezyc.jpg");
@@ -14,7 +15,7 @@ void plik_ini()
 	//iniWriter.WriteFloat("Image", "Path3", 1.82f);
 	//iniWriter.WriteBoolean("Image", "Path4", false);
 
-	CIniReader iniReader("D:\Paths.ini");
+	CIniReader iniReader("D:\\Paths.ini");
 	char *Path1 = iniReader.ReadString("Image", "Path1", "");
 	char *Path2 = iniReader.ReadString("Image", "Path2", "");
 	char *Path3 = iniReader.ReadString("Image", "Path3", "");
