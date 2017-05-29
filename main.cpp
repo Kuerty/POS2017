@@ -1,6 +1,7 @@
 #include "headerKamila.h"
 #include <sys/stat.h>
 #include "headerIdzika.h"
+#include "hederJanka.h"
 
 int main() {
 	
