@@ -6,6 +6,8 @@
 #include <vector>
 #include <Windows.h>
 
+void plik_ini();
+
 class CIniReader
 {
 public:

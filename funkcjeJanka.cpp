@@ -1,7 +1,7 @@
 #include "hederJanka.h"
 
 
-int main(int argc, char * argv[])
+void plik_ini()
 {
 	CIniWriter iniWriter("D:\Paths.ini");
 	iniWriter.WriteString("Image", "Path1", "D:\\\Obrazy\\\gory.jpg");
@@ -55,7 +55,6 @@ int main(int argc, char * argv[])
 	delete Path4;
 	delete Path5;
 	system("PAUSE");
-	return 1;
 }
 //INI_READER
 CIniReader::CIniReader(char* szFileName)
