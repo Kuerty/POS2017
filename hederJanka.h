@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void plik_ini(const string sciezka_do_pliku_ini);
+void plik_ini(vector<string> &tablica);//const vector <string> &path);
 
 class CIniReader
 {

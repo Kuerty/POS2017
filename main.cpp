@@ -3,18 +3,15 @@
 #include "headerIdzika.h"
 #include "hederJanka.h"
 
+
 int main() {
 	
 	string ini_path = "";
 
-	vector <string> images_paths;
+	vector <string> image_paths;
 
-	string nazwa_obrazu = "C:\\Users\\Public\\Pictures\\Sample\ Pictures\\Jellyfish.jpg";
-
-	przetworzobraz(nazwa_obrazu);
-	plik_ini(ini_path);
-
-	//kopiowanie_plikow();
+	plik_ini(image_paths);
+	przetworzobraz(image_paths[0]);
 
 
 	return 0;

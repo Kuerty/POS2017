@@ -1,21 +1,24 @@
 #include "hederJanka.h"
 
 
-void plik_ini(const string sciezka_do_pliku_ini)
+void plik_ini(vector<string> &tablica)
 
 {
-	CIniWriter iniWriter("D:\\Paths.ini");
-	iniWriter.WriteString("Image", "Path1", "D:\\\Obrazy\\\gory.jpg");
+	//zalozylem ze mamy ten plik ini
+	
+	CIniWriter iniWriter(".\\Paths.ini");
+	iniWriter.WriteString("Image", "Path1", "Hydrangeas.jpg");
 	iniWriter.WriteString("Image", "Path2", "D:\\\Obrazy\\\jesien.jpg");
 	iniWriter.WriteString("Image", "Path3", "D:\\\Obrazy\\\ksiezyc.jpg");
 	iniWriter.WriteString("Image", "Path4", "D:\\\Obrazy\\\most.jpg");
 	iniWriter.WriteString("Image", "Path5", "D:\\\Obrazy\\\zima.jpg");
+	
 
 	//iniWriter.WriteInteger("Image", "Path2", 27);
 	//iniWriter.WriteFloat("Image", "Path3", 1.82f);
 	//iniWriter.WriteBoolean("Image", "Path4", false);
 
-	CIniReader iniReader("D:\\Paths.ini");
+	CIniReader iniReader(".\\Paths.ini");
 	char *Path1 = iniReader.ReadString("Image", "Path1", "");
 	char *Path2 = iniReader.ReadString("Image", "Path2", "");
 	char *Path3 = iniReader.ReadString("Image", "Path3", "");
@@ -34,8 +37,7 @@ void plik_ini(const string sciezka_do_pliku_ini)
 		//<< "Height:" << fltHieght << std::endl
 		//<< "Marriage:" << bMarriage << std::endl;
 	
-	std::vector <std::string> tablica;
-	
+
 	tablica.push_back(Path1);
 	tablica.push_back(Path2);
 	tablica.push_back(Path3);
@@ -55,7 +57,6 @@ void plik_ini(const string sciezka_do_pliku_ini)
 	delete Path3;
 	delete Path4;
 	delete Path5;
-	system("PAUSE");
 }
 //INI_READER
 CIniReader::CIniReader(char* szFileName)
