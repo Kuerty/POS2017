@@ -1,5 +1,5 @@
 #include "hederJanka.h"
-
+//sprawdzenie
 int main(int argc, char * argv[])
 {
 	CIniWriter iniWriter("D:\Paths.ini");
