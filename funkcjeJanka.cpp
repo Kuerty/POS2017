@@ -3,9 +3,7 @@
 
 void plik_ini(vector<string> &tablica)
 
-{
-	//zalozylem ze mamy ten plik ini
-	
+{	
 	CIniWriter iniWriter(".\\Paths.ini");
 	iniWriter.WriteString("Image", "Path1", "Hydrangeas.jpg");
 	iniWriter.WriteString("Image", "Path2", "D:\\\Obrazy\\\jesien.jpg");
@@ -14,9 +12,6 @@ void plik_ini(vector<string> &tablica)
 	iniWriter.WriteString("Image", "Path5", "D:\\\Obrazy\\\zima.jpg");
 	
 
-	//iniWriter.WriteInteger("Image", "Path2", 27);
-	//iniWriter.WriteFloat("Image", "Path3", 1.82f);
-	//iniWriter.WriteBoolean("Image", "Path4", false);
 
 	CIniReader iniReader(".\\Paths.ini");
 	char *Path1 = iniReader.ReadString("Image", "Path1", "");
@@ -24,19 +19,12 @@ void plik_ini(vector<string> &tablica)
 	char *Path3 = iniReader.ReadString("Image", "Path3", "");
 	char *Path4 = iniReader.ReadString("Image", "Path4", "");
 	char *Path5 = iniReader.ReadString("Image", "Path5", "");
-	//int iAge = iniReader.ReadInteger("Setting", "Age", 25);
-	//float fltHieght = iniReader.ReadFloat("Setting", "Height", 1.80f);
-	//bool bMarriage = iniReader.ReadBoolean("Setting", "Marriage", true);
 
 	std::cout << "Path1:" << Path1 << std::endl;
 	std::cout << "Path2:" << Path2 << std::endl;
 	std::cout << "Path3:" << Path3 << std::endl;
 	std::cout << "Path4:" << Path4 << std::endl;
-	std::cout << "Path5:" << Path5 << std::endl;
-		//<< "Age:" << iAge << std::endl
-		//<< "Height:" << fltHieght << std::endl
-		//<< "Marriage:" << bMarriage << std::endl;
-	
+	std::cout << "Path5:" << Path5 << std::endl;	
 
 	tablica.push_back(Path1);
 	tablica.push_back(Path2);
@@ -58,17 +46,20 @@ void plik_ini(vector<string> &tablica)
 	delete Path4;
 	delete Path5;
 }
-//INI_READER
+
+
 CIniReader::CIniReader(char* szFileName)
 {
 	memset(m_szFileName, 0x00, 255);
 	memcpy(m_szFileName, szFileName, strlen(szFileName));
 }
+
 int CIniReader::ReadInteger(char* szSection, char* szKey, int iDefaultValue)
 {
 	int iResult = GetPrivateProfileInt(szSection, szKey, iDefaultValue, m_szFileName);
 	return iResult;
 }
+
 float CIniReader::ReadFloat(char* szSection, char* szKey, float fltDefaultValue)
 {
 	char szResult[255];
@@ -79,6 +70,7 @@ float CIniReader::ReadFloat(char* szSection, char* szKey, float fltDefaultValue)
 	fltResult = atof(szResult);
 	return fltResult;
 }
+
 bool CIniReader::ReadBoolean(char* szSection, char* szKey, bool bolDefaultValue)
 {
 	char szResult[255];
@@ -90,6 +82,7 @@ bool CIniReader::ReadBoolean(char* szSection, char* szKey, bool bolDefaultValue)
 		strcmp(szResult, "true") == 0) ? true : false;
 	return bolResult;
 }
+
 char* CIniReader::ReadString(char* szSection, char* szKey, const char* szDefaultValue)
 {
 	char* szResult = new char[255];
@@ -98,30 +91,34 @@ char* CIniReader::ReadString(char* szSection, char* szKey, const char* szDefault
 		szDefaultValue, szResult, 255, m_szFileName);
 	return szResult;
 }
-//INI_WRITER
+
 CIniWriter::CIniWriter(char* szFileName)
 {
 	memset(m_szFileName, 0x00, 255);
 	memcpy(m_szFileName, szFileName, strlen(szFileName));
 }
+
 void CIniWriter::WriteInteger(char* szSection, char* szKey, int iValue)
 {
 	char szValue[255];
 	sprintf_s(szValue, "%d", iValue);
 	WritePrivateProfileString(szSection, szKey, szValue, m_szFileName);
 }
+
 void CIniWriter::WriteFloat(char* szSection, char* szKey, float fltValue)
 {
 	char szValue[255];
 	sprintf_s(szValue, "%f", fltValue);
 	WritePrivateProfileString(szSection, szKey, szValue, m_szFileName);
 }
+
 void CIniWriter::WriteBoolean(char* szSection, char* szKey, bool bolValue)
 {
 	char szValue[255];
 	sprintf_s(szValue, "%s", bolValue ? "True" : "False");
 	WritePrivateProfileString(szSection, szKey, szValue, m_szFileName);
 }
+
 void CIniWriter::WriteString(char* szSection, char* szKey, char* szValue)
 {
 	WritePrivateProfileString(szSection, szKey, szValue, m_szFileName);
