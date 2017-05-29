@@ -5,7 +5,7 @@
 int main() {
 	
 
-	string nazwa_obrazu = "Hydrangeas.jpg";
+	string nazwa_obrazu = "C:\\Users\\Public\\Pictures\\Sample\ Pictures\\Jellyfish.jpg";
 	przetworzobraz(nazwa_obrazu);
 
 	//kopiowanie_plikow();

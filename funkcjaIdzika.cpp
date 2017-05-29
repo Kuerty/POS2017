@@ -22,6 +22,4 @@ void kopiowanie_plikow_v2() {
 	else {
 		cout << "Okay " << endl;
 	}
-
-	system("pause");
 }
