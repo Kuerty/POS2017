@@ -24,9 +24,9 @@ void kopiowanie_plikow_v2() {
 	}
 }
 
-void save_modified_picture(Mat picture) {
+//void save_modified_picture(Mat picture) {
 
-	imwrite("œcie¿ka docelowa pobrana z pliku ini", picture);
-	cout << "File saved" << endl;
+	//imwrite("œcie¿ka docelowa pobrana z pliku ini", picture);
+	//cout << "File saved" << endl;
 
-}
+//}
