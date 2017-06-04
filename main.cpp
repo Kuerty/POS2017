@@ -17,6 +17,9 @@ int main() {
 		*/
 
 	przetworzobraz(image_paths[0]);
+
+	//przetworzobraz("C:\\POS2017\\POS2017\\Hydrangeas.jpg");
+
 	//save_modified_picture(image2);
 
 	return 0;

@@ -1,7 +1,7 @@
-#include "HeaderIdzika.h"
-#include "headerKamila.h"
+#include "headerIdzika.h"
 
 using namespace std;
+using namespace cv;
 
 void kopiowanie_plikow()
 {
@@ -24,9 +24,17 @@ void kopiowanie_plikow_v2() {
 	}
 }
 
-//void save_modified_picture(Mat picture) {
+void save_modified_picture(Mat picture) {
 
-	//imwrite("œcie¿ka docelowa pobrana z pliku ini", picture);
-	//cout << "File saved" << endl;
+	//if() {
+	vector<int> param;
+	param.push_back(CV_IMWRITE_JPEG_QUALITY);
+	param.push_back(95);
+	imwrite("sciezka z pliku ini", picture, param);
+	cout << "File saved to" << "nazwa z pliku ini" << endl;
+	/*}
+	else {
+		cout << "File:" << "nazwa z pliku ini" << "not saved" << endl;
+	}*/
 
-//}
+}//wszystko ladnie smiga

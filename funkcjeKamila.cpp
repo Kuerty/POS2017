@@ -1,8 +1,8 @@
 #include "headerKamila.h"
+#include "headerIdzika.h"
 
 using namespace std;
 using namespace cv;
-
 
 void przetworzobraz(const string nazwa_obrazu) {
 	struct stat buf;
@@ -27,6 +27,8 @@ void przetworzobraz(const string nazwa_obrazu) {
 
 
 		imshow("window2", image2);
+
+		//save_modified_picture(image2); //funkcja Idzika zapisuj¹ca obraz - dziala!
 	}
 	else
 	{
@@ -34,3 +36,5 @@ void przetworzobraz(const string nazwa_obrazu) {
 	}
 	waitKey(0);
 }
+
+
