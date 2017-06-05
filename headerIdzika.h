@@ -17,5 +17,6 @@ using namespace cv;
 void kopiowanie_plikow();
 void kopiowanie_plikow_v2();
 void save_modified_picture(Mat picture);
+Mat makeCanvas(vector<Mat>& vecMat, int windowHeight, int nRows);
 
 #endif 

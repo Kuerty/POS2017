@@ -29,6 +29,8 @@ void przetworzobraz(const string nazwa_obrazu) {
 		imshow("window2", image2);
 
 		//save_modified_picture(image2); //funkcja Idzika zapisuj¹ca obraz - dziala!
+		//save_modified_picture(makeCanvas(image2, 1000, 3));
+		
 	}
 	else
 	{
