@@ -4,29 +4,27 @@
 using namespace std;
 using namespace cv;
 
-void przetworzobraz(const string nazwa_obrazu) {
+void przetworzobraz(const string nazwa_obrazu, Mat & image1) {
 	struct stat buf;
 
 	if (stat(nazwa_obrazu.c_str(), &buf) != -1) {
 
-		Mat image, image2;
-
-		image = imread(nazwa_obrazu, 1); //œcie¿ka obrazu
+		image1 = imread(nazwa_obrazu, 1); //œcie¿ka obrazu
 
 		vector<Mat> channels;
-		cvtColor(image, image, COLOR_BGR2YCrCb);
+		cvtColor(image1, image1, COLOR_BGR2YCrCb);
 
-		split(image, channels);
+		split(image1, channels);
 		equalizeHist(channels[0], channels[0]); //wyrównuje histogram sk³adowej Y (sk³adowa luminacji)
-		merge(channels, image2);
+		merge(channels, image1);
 
-		cvtColor(image2, image2, CV_YCrCb2BGR);
+		cvtColor(image1, image1, CV_YCrCb2BGR);
 
 
 		namedWindow("window2", CV_WINDOW_AUTOSIZE);
 
 
-		imshow("window2", image2);
+		imshow("window2", image1);
 
 		//save_modified_picture(image2); //funkcja Idzika zapisuj¹ca obraz - dziala!
 		//save_modified_picture(makeCanvas(image2, 1000, 3));
@@ -36,7 +34,16 @@ void przetworzobraz(const string nazwa_obrazu) {
 	{
 		cout << nazwa_obrazu << " nie istnieje w katologu programu" << endl;
 	}
-	waitKey(0);
+}
+
+void zmienrozmiar(cv::Mat im1, int width, int height) {
+
+	Size image1_size(width, height);
+	resize(im1, im1, image1_size);
+
+	namedWindow("resized", CV_WINDOW_AUTOSIZE);
+	imshow("resized", im1);
+
 }
 
 
