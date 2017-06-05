@@ -3,6 +3,15 @@
 using namespace std;
 using namespace cv;
 
+/**********************************************************************************************//**
+ * @fn	void kopiowanie_plikow()
+ *
+ * @brief	Kopiowanie plikow.
+ *
+ * @author	Micha³
+ * @date	05.06.2017
+ **************************************************************************************************/
+
 void kopiowanie_plikow()
 {
 	const string file_to_copy = "C:\\...\\filename.ext"; // tutaj czekamy na stringi od Jana z pliku INI
@@ -14,6 +23,15 @@ void kopiowanie_plikow()
 		cout << "File" << file_to_copy.c_str() << " could not be copied successfully " << " Last error " << GetLastError() << endl;
 }
 
+/**********************************************************************************************//**
+ * @fn	void kopiowanie_plikow_v2()
+ *
+ * @brief	Kopiowanie plikow v 2.
+ *
+ * @author	Micha³
+ * @date	05.06.2017
+ **************************************************************************************************/
+
 void kopiowanie_plikow_v2() {
 	BOOL b = CopyFileA("C:\\kod_visio.jpg", "C:\\Users\\Micha³\\Documents\\Visual Studio 2017\\Projects\\ConsoleApplication2\\kod_visio.jpg", TRUE);
 	if (!b) {
@@ -23,6 +41,17 @@ void kopiowanie_plikow_v2() {
 		cout << "Okay " << endl;
 	}
 }
+
+/**********************************************************************************************//**
+ * @fn	void save_modified_picture(Mat picture)
+ *
+ * @brief	Saves a modified picture.
+ *
+ * @author	Micha³
+ * @date	05.06.2017
+ *
+ * @param	picture	The picture.
+ **************************************************************************************************/
 
 void save_modified_picture(Mat picture) {
 
