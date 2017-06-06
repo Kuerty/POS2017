@@ -5,46 +5,26 @@ void plik_ini(vector<string> &tablica)
 
 {	
 	CIniWriter iniWriter(".\\Paths.ini");
-	iniWriter.WriteString("Image", "Path1", "Hydrangeas.jpg");
-	iniWriter.WriteString("Image", "Path2", "D:\\\Obrazy\\\jesien.jpg");
-	iniWriter.WriteString("Image", "Path3", "D:\\\Obrazy\\\ksiezyc.jpg");
-	iniWriter.WriteString("Image", "Path4", "D:\\\Obrazy\\\most.jpg");
-	iniWriter.WriteString("Image", "Path5", "D:\\\Obrazy\\\zima.jpg");
+	iniWriter.WriteString("Images","Input", ".\\\\Input");
+	iniWriter.WriteString("Images", "Output", ".\\\\Output");
 	
-
-
 	CIniReader iniReader(".\\Paths.ini");
-	char *Path1 = iniReader.ReadString("Image", "Path1", "");
-	char *Path2 = iniReader.ReadString("Image", "Path2", "");
-	char *Path3 = iniReader.ReadString("Image", "Path3", "");
-	char *Path4 = iniReader.ReadString("Image", "Path4", "");
-	char *Path5 = iniReader.ReadString("Image", "Path5", "");
+	char *Path_input = iniReader.ReadString("Images", "Input", "");
+	char *Path_output = iniReader.ReadString("Images", "Output", "");
 
-	std::cout << "Path1:" << Path1 << std::endl;
-	std::cout << "Path2:" << Path2 << std::endl;
-	std::cout << "Path3:" << Path3 << std::endl;
-	std::cout << "Path4:" << Path4 << std::endl;
-	std::cout << "Path5:" << Path5 << std::endl;	
 
-	tablica.push_back(Path1);
-	tablica.push_back(Path2);
-	tablica.push_back(Path3);
-	tablica.push_back(Path4);
-	tablica.push_back(Path5);
+	std::cout << "Path1:" << Path_input << std::endl;
+	std::cout << "Path2:" << Path_output << std::endl;
+	
+	tablica.push_back(Path_input);
+	tablica.push_back(Path_output);
 
 	std::cout << "Vector:" << std::endl;
 	std::cout << "Path1 = " << tablica[0] << std::endl;
 	std::cout << "Path2 = " << tablica[1] << std::endl;
-	std::cout << "Path3 = " << tablica[2] << std::endl;
-	std::cout << "Path4 = " << tablica[3] << std::endl;
-	std::cout << "Path5 = " << tablica[4] << std::endl;
 
-
-	delete Path1;
-	delete Path2;
-	delete Path3;
-	delete Path4;
-	delete Path5;
+	delete Path_input;
+	delete Path_output;
 }
 
 
