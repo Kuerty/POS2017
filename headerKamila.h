@@ -9,6 +9,6 @@
 using namespace std;
 
 void przetworzobraz(const string nazwa_obrazu, cv::Mat& image1); //przetwarza obraz metod¹ uœredniania jasnoœci
-void zmienrozmiar(cv::Mat im1, int width, int height);
+void zmienrozmiar(cv::Mat& im1, int width, int height);
 
 #endif // !headerKamila_h

@@ -21,10 +21,10 @@ void przetworzobraz(const string nazwa_obrazu, Mat & image1) {
 		cvtColor(image1, image1, CV_YCrCb2BGR);
 
 
-		namedWindow("window2", CV_WINDOW_AUTOSIZE);
+		//namedWindow("window2", CV_WINDOW_AUTOSIZE);
 
 
-		imshow("window2", image1);
+		//imshow("window2", image1);
 
 		//save_modified_picture(image2); //funkcja Idzika zapisuj¹ca obraz - dziala!
 		//save_modified_picture(makeCanvas(image2, 1000, 3));
@@ -36,13 +36,13 @@ void przetworzobraz(const string nazwa_obrazu, Mat & image1) {
 	}
 }
 
-void zmienrozmiar(cv::Mat im1, int width, int height) {
+void zmienrozmiar(cv::Mat& im1, int width, int height) {
 
 	Size image1_size(width, height);
 	resize(im1, im1, image1_size);
 
-	namedWindow("resized", CV_WINDOW_AUTOSIZE);
-	imshow("resized", im1);
+	//namedWindow("resized", CV_WINDOW_AUTOSIZE);
+	//imshow("resized", im1);
 
 }
 
