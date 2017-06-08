@@ -22,6 +22,7 @@ int main() {
 	zmienrozmiar(obraz_do_testow, 150, 150);
 	zmienrozmiar(sss, 150, 150);
 	hconcat(obraz_do_testow, sss, ssss);
+	vconcat(ssss, ssss, ssss);
 	
 	namedWindow("test", WINDOW_AUTOSIZE);
 	imshow("test", ssss);
