@@ -43,7 +43,27 @@ void zmienrozmiar(cv::Mat& im1, int width, int height) {
 
 	//namedWindow("resized", CV_WINDOW_AUTOSIZE);
 	//imshow("resized", im1);
+}
 
+void find_file_names(vector <string> &image_paths) {
+	string input_dir, output_dir;
+	input_dir = "C:\\data\\input\\*.*";
+	output_dir = "C:\\data\\output";
+	HANDLE hfind;
+	WIN32_FIND_DATA data;
+	hfind = FindFirstFile(LPCSTR(input_dir.c_str()), &data);
+	if (hfind != INVALID_HANDLE_VALUE) {
+		
+		do
+		{
+			image_paths.push_back(data.cFileName);
+		} while (FindNextFile( hfind,&data) != 0);
+	}
+	else
+	{
+		cout << endl << GetLastError();
+	}
+	FindClose(hfind);
 }
 
 
