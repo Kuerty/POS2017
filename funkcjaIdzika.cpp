@@ -53,14 +53,16 @@ void kopiowanie_plikow_v2() {
  * @param	picture	The picture.
  **************************************************************************************************/
 
-void save_modified_picture(Mat picture) {
+void save_modified_picture(Mat picture, const string filename, const string output_dir_path) {
 
 	//if(picture != NULL) {
 	vector<int> param;
 	param.push_back(CV_IMWRITE_JPEG_QUALITY);
 	param.push_back(95);
-	imwrite("sciezka z pliku ini", picture, param);
-	cout << "File saved to" << "nazwa z pliku ini" << endl;
+	string filepath;
+	filepath = output_dir_path + "\\" + filename;
+	imwrite(filepath, picture, param);
+	cout << "File saved to" << filepath << endl;
 	/*}
 	else {
 		cout << "File:" << "nazwa z pliku ini" << "not saved" << endl;
