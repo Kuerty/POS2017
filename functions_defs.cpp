@@ -101,7 +101,7 @@ void calculate_collage_dims(int & horizontal, int & vertical, double number_of_e
 		horizontal = (int)kw;
 	}
 
-	if (horizontal*(int)kw > (number_of_elements - 2))
+	if (horizontal*(int)kw >= (number_of_elements - 2))
 	{
 		vertical = (int)kw;
 	}
@@ -163,4 +163,18 @@ void start_algorithm(int &bok_v, int &bok_h, int &miniature_size, int &number_of
 		}
 	}
 }
-
+void load_ini(string &input_dir_path, string &output_dir_path)
+{
+	string inipath = "";
+	cout << endl << "type path to ini fileand press enter. For default pass d and press enter ( \"C:\\data\\POS.ini\")" << endl;
+	cin >> inipath;
+	if ("d" == inipath)
+		inipath = "C:\\data\\POS.ini";
+	TCHAR key_value_from_ini[32];
+	GetPrivateProfileString("source", "PATH", "C:\\data\\input", key_value_from_ini, 32, inipath.c_str());
+	input_dir_path = key_value_from_ini;
+	cout << "input directory path: " << input_dir_path << endl;
+	GetPrivateProfileString("destination", "PATH", "C:\\data\\output", key_value_from_ini, 32, inipath.c_str());
+	output_dir_path = key_value_from_ini;
+	cout << "output directory path: " << output_dir_path << endl;
+}

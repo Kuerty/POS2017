@@ -23,4 +23,5 @@ void make_black_square(cv::Mat& matrix, int size);
 void calculate_collage_dims(int & horizontal, int & vertical, double number_of_elements);
 void save_modified_picture(cv::Mat picture, const string filename, const string output_dir_path);
 void start_algorithm(int &bok_v, int &bok_h, int &miniature_size, int &number_of_pictures, vector <string> &image_name, string &input_dir_path, string &output_dir_path, cv::Mat &image1, cv::Mat &image2, cv::Mat &im_line_x, cv::Mat &black_square);
+void load_ini(string &input_dir_path, string &output_dir_path);
 #endif // !functions_defs_h
