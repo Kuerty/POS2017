@@ -1,7 +1,7 @@
 #include "functions_defs.h"
 
 
-void save_modified_picture(Mat picture, const string filename, const string output_dir_path) 
+void save_modified_picture(Mat picture, const string filename, const string output_dir_path)
 {
 	//if(picture != NULL) {
 	vector<int> param;
@@ -44,7 +44,7 @@ void przetworzobraz(const string nazwa_obrazu, const string sciezka_katalogu_obr
 
 		//save_modified_picture(image2); //funkcja Idzika zapisuj¹ca obraz - dziala!
 		//save_modified_picture(makeCanvas(image2, 1000, 3));
-		
+
 	}
 	else
 	{
@@ -61,7 +61,7 @@ void zmienrozmiar(cv::Mat& input_mat, cv::Mat& output_mat, int width, int height
 	//imshow("resized", input_mat);
 }
 
-void find_file_names(vector <string> &image_paths, string input_dir) 
+void find_file_names(vector <string> &image_paths, string input_dir)
 {
 	input_dir;
 	input_dir += "\\*.*";
@@ -69,11 +69,11 @@ void find_file_names(vector <string> &image_paths, string input_dir)
 	WIN32_FIND_DATA data;
 	hfind = FindFirstFile(LPCSTR(input_dir.c_str()), &data);
 	if (hfind != INVALID_HANDLE_VALUE) {
-		
+
 		do
 		{
 			image_paths.push_back(data.cFileName);
-		} while (FindNextFile( hfind,&data) != 0);
+		} while (FindNextFile(hfind, &data) != 0);
 	}
 	else
 	{
@@ -82,12 +82,11 @@ void find_file_names(vector <string> &image_paths, string input_dir)
 	FindClose(hfind);
 }
 
-void make_black_square(cv::Mat& matrix, int size) 
+void make_black_square(cv::Mat& matrix, int size)
 {
-	Mat test;
 	matrix = Mat::zeros(size, size, CV_8UC3);
-	test = Mat::zeros(150, 150, CV_8UC3);
 }
+
 void calculate_collage_dims(int & horizontal, int & vertical, double number_of_elements)
 {
 
@@ -102,7 +101,7 @@ void calculate_collage_dims(int & horizontal, int & vertical, double number_of_e
 		horizontal = (int)kw;
 	}
 
-	if (horizontal*(int)kw > (number_of_elements - 2))
+	if (horizontal*(int)kw >= (number_of_elements - 2))
 	{
 		vertical = (int)kw;
 	}
