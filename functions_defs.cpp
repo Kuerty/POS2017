@@ -84,10 +84,9 @@ void find_file_names(vector <string> &image_paths, string input_dir)
 
 void make_black_square(cv::Mat& matrix, int size) 
 {
-	Mat test;
 	matrix = Mat::zeros(size, size, CV_8UC3);
-	test = Mat::zeros(150, 150, CV_8UC3);
 }
+
 void calculate_collage_dims(int & horizontal, int & vertical, double number_of_elements)
 {
 
