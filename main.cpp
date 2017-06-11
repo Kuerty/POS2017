@@ -1,35 +1,27 @@
-#include "headerKamila.h"
-#include <sys/stat.h>
-#include "headerIdzika.h"
-#include "hederJanka.h"
-#include <math.h>
+#include "functions_defs.h"
+
 
 int main() {
-	
-	string ini_path = "";
 
-	vector <string> image_paths;
-	Mat obraz_do_testow;
-	//Mat sss, ssss;
+	string input_dir_path = "C:\\data\\input"; //from ini file
+	string output_dir_path = "C:\\data\\output"; //from ini file
 
-	//plik_ini(image_paths);
-		/* WERSJA DRUGA WCZYTANIA INI ZOSTAWCIE POKI CO
-		TCHAR inipath[32];
-		GetPrivateProfileString("Image", "PATH1", ".\\default.jpg", inipath, 32, ".\\Paths.ini"); //generalnie to tez pobiera co chcemy
-		*/
-	image_paths.push_back("Hydrangeas.jpg");
-	przetworzobraz(image_paths[0], obraz_do_testow);
-//	przetworzobraz(image_paths[0], sss);
-//	zmienrozmiar(obraz_do_testow, 150, 150);
-//	zmienrozmiar(sss, 150, 150);
-//	hconcat(obraz_do_testow, sss, ssss);
-//	vconcat(ssss, ssss, ssss);
+	vector <string> image_name;
+	Mat black_square;
+	Mat image1, image2, im_line_x, im_lin_x_1;
+	vector <Mat> im;
+	int bok_h, bok_v;
+	int miniature_size = 200;
+	make_black_square(black_square, miniature_size);
+	find_file_names(image_name, input_dir_path);
+	int number_of_pictures = image_name.size();
+	calculate_collage_dims(bok_h, bok_v, number_of_pictures);
+
+	start_algorithm(bok_v, bok_h, miniature_size, number_of_pictures, image_name, input_dir_path, output_dir_path, image1, image2, im_line_x, black_square);
 	
-	namedWindow("test", WINDOW_AUTOSIZE);
-	imshow("test", obraz_do_testow);
-	//save_modified_picture(image2);
-	find_file_names(image_paths);
-	cout << endl << sqrt(image_paths.size()) << endl;
+	//namedWindow("sss", CV_WINDOW_AUTOSIZE);
+	imshow("namedwindow", image1);
+	
 
 	waitKey(0);
 
