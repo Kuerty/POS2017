@@ -29,7 +29,7 @@ int main() {
 	
 	load_then_process_mt(image_name, input_dir_path, input_im_conatainer, output_im_container, number_of_threads,name_to_save);
 	
-	for (int i = 0; i < number_of_pictures; i++)
+	//for (int i = 0; i < number_of_pictures; i++)
 	//{
 	//	save_modified_picture(output_im_container[i], name_to_save[i], output_dir_path);
 	//}
