@@ -11,17 +11,21 @@
 #include <iostream>
 #include<conio.h>
 #include<stdio.h>
+#include <time.h>
+#include <thread>
 
 
 using namespace std;
 using namespace cv;
 
-void przetworzobraz(const string nazwa_obrazu, const string sciezka_katalogu_obrazu, cv::Mat & image1); //przetwarza obraz metod¹ uœredniania jasnoœci
-void zmienrozmiar(cv::Mat& input_mat, cv::Mat& output_mat, int width, int height);
+void wczytaj_obraz(const string nazwa_obrazu, const string sciezka_katalogu_obrazu, vector <Mat> & input_im_conatainer);
+void przetworzobraz(Mat & input_image, vector <Mat> & output_im_container); //przetwarza obraz metod¹ uœredniania jasnoœci
+void zmienrozmiar(Mat& input_mat, Mat& output_mat, int width, int height);
 void find_file_names(vector <string> &image_paths, string input_dir);
-void make_black_square(cv::Mat& matrix, int size);
+void make_black_square(Mat& matrix, int size);
 void calculate_collage_dims(int & horizontal, int & vertical, double number_of_elements);
-void save_modified_picture(cv::Mat picture, const string filename, const string output_dir_path);
-void start_algorithm(int &bok_v, int &bok_h, int &miniature_size, int &number_of_pictures, vector <string> &image_name, string &input_dir_path, string &output_dir_path, cv::Mat &image1, cv::Mat &image2, cv::Mat &im_line_x, cv::Mat &black_square);
+void save_modified_picture(Mat &picture, const string &filename, const string &output_dir_path);
 void load_ini(string &input_dir_path, string &output_dir_path);
+void load_then_process_mt(vector <string> &image_name, string &input_dir_path, vector <Mat> &input_im_conatainer, vector <Mat> &output_im_container, int number_of_threads);
+void make_collage(Mat & collage, Mat & black_square, vector <Mat> & output_im_container, int horizontal, int vertical, int number_of_pictures);
 #endif // !functions_defs_h

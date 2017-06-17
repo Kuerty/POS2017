@@ -1,9 +1,8 @@
 #include "functions_defs.h"
 
 
-void save_modified_picture(Mat picture, const string filename, const string output_dir_path) 
+void save_modified_picture(Mat &picture, const string &filename, const string &output_dir_path) 
 {
-	//if(picture != NULL) {
 	vector<int> param;
 	param.push_back(CV_IMWRITE_JPEG_QUALITY);
 	param.push_back(95);
@@ -11,40 +10,19 @@ void save_modified_picture(Mat picture, const string filename, const string outp
 	filepath = output_dir_path + "\\" + filename;
 	imwrite(filepath, picture, param);
 	cout << "File saved to" << filepath << endl;
-	/*}
-	else {
-	cout << "File:" << "nazwa z pliku ini" << "not saved" << endl;
-	}*/
 
-}//wszystko ladnie smiga
+}
 
-void przetworzobraz(const string nazwa_obrazu, const string sciezka_katalogu_obrazu, Mat & image1) {
+void wczytaj_obraz(const string nazwa_obrazu, const string sciezka_katalogu_obrazu, vector <Mat> & input_im_conatainer)
+{
 	struct stat buf;
-
+	Mat im_handler;
 	string sciezka_obrazu;
 	sciezka_obrazu = sciezka_katalogu_obrazu + "\\" + nazwa_obrazu;
-	if (stat(sciezka_katalogu_obrazu.c_str(), &buf) != -1) {
 
-		image1 = imread(sciezka_obrazu, 1); //œcie¿ka obrazu
-
-		vector<Mat> channels;
-		cvtColor(image1, image1, COLOR_BGR2YCrCb);
-
-		split(image1, channels);
-		equalizeHist(channels[0], channels[0]); //wyrównuje histogram sk³adowej Y (sk³adowa luminacji)
-		merge(channels, image1);
-
-		cvtColor(image1, image1, CV_YCrCb2BGR);
-
-
-		//namedWindow("window2", CV_WINDOW_AUTOSIZE);
-
-
-		//imshow("window2", image1);
-
-		//save_modified_picture(image2); //funkcja Idzika zapisuj¹ca obraz - dziala!
-		//save_modified_picture(makeCanvas(image2, 1000, 3));
-		
+	if (stat(sciezka_obrazu.c_str(), &buf) != -1) {
+		im_handler = imread(sciezka_obrazu, 1);
+		input_im_conatainer.push_back(im_handler);
 	}
 	else
 	{
@@ -52,13 +30,23 @@ void przetworzobraz(const string nazwa_obrazu, const string sciezka_katalogu_obr
 	}
 }
 
-void zmienrozmiar(cv::Mat& input_mat, cv::Mat& output_mat, int width, int height) {
+void przetworzobraz(Mat & input_image, vector <Mat> & output_im_container) 
+{
+	Mat im_handler;
+	vector<Mat> channels;
+	im_handler = input_image;
+	cvtColor(im_handler, im_handler, COLOR_BGR2YCrCb);
+	split(im_handler, channels);
+	equalizeHist(channels[0], channels[0]); //wyrównuje histogram sk³adowej Y (sk³adowa luminacji)
+	merge(channels, im_handler);
+	cvtColor(im_handler, im_handler, CV_YCrCb2BGR);
+	output_im_container.push_back(im_handler);		
+}
 
+void zmienrozmiar(cv::Mat& input_mat, cv::Mat& output_mat, int width, int height) 
+{
 	Size image1_size(width, height);
 	resize(input_mat, output_mat, image1_size);
-
-	//namedWindow("resized", CV_WINDOW_AUTOSIZE);
-	//imshow("resized", input_mat);
 }
 
 void find_file_names(vector <string> &image_paths, string input_dir) 
@@ -68,8 +56,8 @@ void find_file_names(vector <string> &image_paths, string input_dir)
 	HANDLE hfind;
 	WIN32_FIND_DATA data;
 	hfind = FindFirstFile(LPCSTR(input_dir.c_str()), &data);
-	if (hfind != INVALID_HANDLE_VALUE) {
-		
+	if (hfind != INVALID_HANDLE_VALUE) 
+	{		
 		do
 		{
 			image_paths.push_back(data.cFileName);
@@ -89,9 +77,7 @@ void make_black_square(cv::Mat& matrix, int size)
 
 void calculate_collage_dims(int & horizontal, int & vertical, double number_of_elements)
 {
-
-	double kw = sqrt(number_of_elements - 2);
-
+	double kw = sqrt(number_of_elements);
 	if (kw > (int)kw)
 	{
 		horizontal = (int)kw + 1;
@@ -101,7 +87,7 @@ void calculate_collage_dims(int & horizontal, int & vertical, double number_of_e
 		horizontal = (int)kw;
 	}
 
-	if (horizontal*(int)kw >= (number_of_elements - 2))
+	if (horizontal*(int)kw >= (number_of_elements))
 	{
 		vertical = (int)kw;
 	}
@@ -111,65 +97,15 @@ void calculate_collage_dims(int & horizontal, int & vertical, double number_of_e
 	}
 }
 
-void start_algorithm(int &bok_v, int &bok_h, int &miniature_size, int &number_of_pictures, vector <string> &image_name, string &input_dir_path, string &output_dir_path, cv::Mat &image1, cv::Mat &image2, cv::Mat &im_line_x, cv::Mat &black_square)
-{
-	for (int j = 0; j <= bok_v - 1; j++)
-	{
-		if (0 == j) {
-			przetworzobraz(image_name[2 + (j*bok_h)], input_dir_path, image1);
-			save_modified_picture(image1, image_name[2 + (j*bok_h)], output_dir_path);
-			zmienrozmiar(image1, image1, miniature_size, miniature_size);
-
-			for (int i = 3 + (bok_h*j); ((bok_h*(j + 1)) + 2) > i; i++)
-			{
-				przetworzobraz(image_name[i], input_dir_path, image2);
-				save_modified_picture(image2, image_name[i], output_dir_path);
-				zmienrozmiar(image2, image2, miniature_size, miniature_size);
-				hconcat(image1, image2, image1);
-			}
-		}
-		else if (j == bok_v - 1)
-		{
-			przetworzobraz(image_name[2 + (j*bok_h)], input_dir_path, im_line_x);
-			save_modified_picture(im_line_x, image_name[2 + (j*bok_h)], output_dir_path);
-			zmienrozmiar(im_line_x, im_line_x, miniature_size, miniature_size);
-
-			for (int i = 3 + (bok_h*j); ((bok_h*(j + 1)) + 2) - (((bok_h*bok_v) - number_of_pictures)) - 2 > i; i++)
-			{
-				przetworzobraz(image_name[i], input_dir_path, image2);
-				save_modified_picture(image2, image_name[i], output_dir_path);
-				zmienrozmiar(image2, image2, miniature_size, miniature_size);
-				hconcat(im_line_x, image2, im_line_x);
-			}
-			for (int i = 0; ((bok_h*bok_v) - (number_of_pictures - 2)) > i; i++)
-			{
-				hconcat(im_line_x, black_square, im_line_x);
-			}
-			vconcat(image1, im_line_x, image1);
-		}
-		else
-		{
-			przetworzobraz(image_name[2 + (j*bok_h)], input_dir_path, im_line_x);
-			save_modified_picture(im_line_x, image_name[2 + (j*bok_h)], output_dir_path);
-			zmienrozmiar(im_line_x, im_line_x, miniature_size, miniature_size);
-			for (int i = 3 + (bok_h*j); ((bok_h*(j + 1)) + 2) > i; i++)
-			{
-				przetworzobraz(image_name[i], input_dir_path, image2);
-				save_modified_picture(image2, image_name[i], output_dir_path);
-				zmienrozmiar(image2, image2, miniature_size, miniature_size);
-				hconcat(im_line_x, image2, im_line_x);
-			}
-			vconcat(image1, im_line_x, image1);
-		}
-	}
-}
 void load_ini(string &input_dir_path, string &output_dir_path)
 {
 	string inipath = "";
 	cout << endl << "type path to ini fileand press enter. For default pass d and press enter ( \"C:\\data\\POS.ini\")" << endl;
 	cin >> inipath;
 	if ("d" == inipath)
+	{
 		inipath = "C:\\data\\POS.ini";
+	}
 	TCHAR key_value_from_ini[32];
 	GetPrivateProfileString("source", "PATH", "C:\\data\\input", key_value_from_ini, 32, inipath.c_str());
 	input_dir_path = key_value_from_ini;
@@ -177,4 +113,55 @@ void load_ini(string &input_dir_path, string &output_dir_path)
 	GetPrivateProfileString("destination", "PATH", "C:\\data\\output", key_value_from_ini, 32, inipath.c_str());
 	output_dir_path = key_value_from_ini;
 	cout << "output directory path: " << output_dir_path << endl;
+}
+
+void load_then_process_mt(vector <string> &image_name, string &input_dir_path, vector <Mat> &input_im_conatainer, vector <Mat> &output_im_container, int number_of_threads)
+{
+	for (int j = 0; (j)* number_of_threads < image_name.size(); j++)
+	{
+		thread *tt = new thread[number_of_threads];
+		for (int i = number_of_threads * j; i < number_of_threads + (number_of_threads * j); i++)
+		{
+			if (i >= image_name.size() - 2)
+				break;
+			wczytaj_obraz(image_name[i + 2], input_dir_path, input_im_conatainer);
+			tt[i - (number_of_threads * j)] = thread(przetworzobraz, ref(input_im_conatainer[i]), ref(output_im_container));
+		}
+		for (int i = number_of_threads * j; i < number_of_threads + (number_of_threads * j); i++)
+		{
+			if (i >= image_name.size() - 2)
+				break;
+			tt[i - (number_of_threads * j)].join();
+		}
+		delete[] tt;
+	}
+}
+
+
+void make_collage( Mat & collage, Mat & black_square, vector <Mat> & output_im_container, int horizontal, int vertical, int number_of_pictures)
+{
+	Mat collage_line;
+	for (int j = 0; j < vertical; j++)
+	{
+		collage_line = output_im_container[j*horizontal];
+		for (int i = j*horizontal; i < (j + 1)*horizontal - 1; i++)
+		{
+			if (i >= number_of_pictures - 1)
+			{
+				hconcat(collage_line, black_square, collage_line);
+			}
+			else
+			{
+				hconcat(collage_line, output_im_container[i + 1], collage_line);
+			}
+		}
+		if (j == 0)
+		{
+			collage = collage_line;
+		}
+		else
+		{
+			vconcat(collage, collage_line, collage);
+		}
+	}
 }
