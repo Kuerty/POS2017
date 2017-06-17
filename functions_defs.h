@@ -28,4 +28,5 @@ void save_modified_picture(Mat &picture, const string &filename, const string &o
 void load_ini(string &input_dir_path, string &output_dir_path);
 void load_then_process_mt(vector <string> &image_name, string &input_dir_path, vector <Mat> &input_im_conatainer, vector <Mat> &output_im_container, int number_of_threads);
 void make_collage(Mat & collage, Mat & black_square, vector <Mat> & output_im_container, int horizontal, int vertical, int number_of_pictures);
+void save_mt(vector <Mat> & output_im_container, vector <string> & image_name, string &output_dir_path, int number_of_threads, int number_of_pictures);
 #endif // !functions_defs_h

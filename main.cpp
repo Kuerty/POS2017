@@ -21,14 +21,20 @@ int main() {
 	find_file_names(image_name, input_dir_path);
 	int number_of_pictures = image_name.size()-2;
 	calculate_collage_dims(miniatures_in_row, miniatures_in_column, number_of_pictures);
+	//cout << "podaj wielkosc miniaturek" << endl; 
+	//cin << miniature_square_size;
+	
 	start = clock();
 	
 	load_then_process_mt(image_name, input_dir_path, input_im_conatainer, output_im_container, number_of_threads);
-
+	/*
 	for (int i = 0; i < number_of_pictures; i++)
 	{
 		save_modified_picture(output_im_container[i], image_name[i + 2], output_dir_path);
 	}
+	*/
+	save_mt(output_im_container, image_name, output_dir_path, number_of_threads, number_of_pictures);
+
 	for (int i = 0; i < number_of_pictures; i++)
 	{
 		zmienrozmiar(output_im_container[i], output_im_container[i], miniature_square_size, miniature_square_size);

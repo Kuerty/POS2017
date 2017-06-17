@@ -9,7 +9,7 @@ void save_modified_picture(Mat &picture, const string &filename, const string &o
 	string filepath;
 	filepath = output_dir_path + "\\" + filename;
 	imwrite(filepath, picture, param);
-	cout << "File saved to" << filepath << endl;
+	//cout << "File saved to" << filepath << endl;
 
 }
 
@@ -164,4 +164,27 @@ void make_collage( Mat & collage, Mat & black_square, vector <Mat> & output_im_c
 			vconcat(collage, collage_line, collage);
 		}
 	}
+}
+
+void save_mt(vector <Mat> & output_im_container, vector <string> & image_name, string &output_dir_path, int number_of_threads, int number_of_pictures)
+{
+	thread *tt = new thread[number_of_threads];
+	for (int j = 0; j * 8 < number_of_pictures; j++)
+	{
+		for (int i = 0; i < number_of_threads; i++)
+		{
+			if (i + (j * 8) < number_of_pictures)
+				tt[i] = thread(save_modified_picture, ref(output_im_container[i]), ref(image_name[(i + 2) + j * 8]), ref(output_dir_path));
+			else
+				break;
+		}
+		for (int i = 0; i < number_of_threads; i++)
+		{
+			if (i + (j * 8) < number_of_pictures)
+				tt[i].join();
+			else
+				break;
+		}
+	}
+
 }
