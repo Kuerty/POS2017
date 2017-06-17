@@ -11,6 +11,7 @@ int main() {
 	load_ini(input_dir_path, output_dir_path);
 	int number_of_threads = 8;
 	vector <string> image_name;
+	vector <string> name_to_save;
 
 	Mat black_square;
 	make_black_square(black_square, miniature_square_size);
@@ -26,14 +27,14 @@ int main() {
 	
 	start = clock();
 	
-	load_then_process_mt(image_name, input_dir_path, input_im_conatainer, output_im_container, number_of_threads);
-	/*
+	load_then_process_mt(image_name, input_dir_path, input_im_conatainer, output_im_container, number_of_threads,name_to_save);
+	
 	for (int i = 0; i < number_of_pictures; i++)
-	{
-		save_modified_picture(output_im_container[i], image_name[i + 2], output_dir_path);
-	}
-	*/
-	save_mt(output_im_container, image_name, output_dir_path, number_of_threads, number_of_pictures);
+	//{
+	//	save_modified_picture(output_im_container[i], name_to_save[i], output_dir_path);
+	//}
+	
+	save_mt(output_im_container, name_to_save, output_dir_path, number_of_threads, number_of_pictures);
 
 	for (int i = 0; i < number_of_pictures; i++)
 	{
@@ -41,6 +42,7 @@ int main() {
 	}
 	make_collage(collage, black_square, output_im_container, miniatures_in_row, miniatures_in_column, number_of_pictures);
 	stop = clock();
+
 
 	namedWindow("collage", CV_WINDOW_AUTOSIZE);
 	imshow("collage", collage);
@@ -52,7 +54,9 @@ int main() {
 	//imshow("miniatures after process", input_im_conatainer[3]);
 
 	cout << "petla trwala " << (double)(stop - start) << " cykli zegara proceora" << endl;
+	//assert(_CrtCheckMemory());
 	waitKey(0);
 
 	return 0;
+
 }

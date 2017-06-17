@@ -30,7 +30,7 @@ void wczytaj_obraz(const string nazwa_obrazu, const string sciezka_katalogu_obra
 	}
 }
 
-void przetworzobraz(Mat & input_image, vector <Mat> & output_im_container) 
+void przetworzobraz(Mat & input_image, vector <Mat> & output_im_container, vector <string> & name_to_save,string &image_name)
 {
 	Mat im_handler;
 	vector<Mat> channels;
@@ -40,7 +40,9 @@ void przetworzobraz(Mat & input_image, vector <Mat> & output_im_container)
 	equalizeHist(channels[0], channels[0]); //wyrównuje histogram sk³adowej Y (sk³adowa luminacji)
 	merge(channels, im_handler);
 	cvtColor(im_handler, im_handler, CV_YCrCb2BGR);
-	output_im_container.push_back(im_handler);		
+	output_im_container.push_back(im_handler);
+	name_to_save.push_back(image_name);
+
 }
 
 void zmienrozmiar(cv::Mat& input_mat, cv::Mat& output_mat, int width, int height) 
@@ -115,7 +117,7 @@ void load_ini(string &input_dir_path, string &output_dir_path)
 	cout << "output directory path: " << output_dir_path << endl;
 }
 
-void load_then_process_mt(vector <string> &image_name, string &input_dir_path, vector <Mat> &input_im_conatainer, vector <Mat> &output_im_container, int number_of_threads)
+void load_then_process_mt(vector <string> &image_name, string &input_dir_path, vector <Mat> &input_im_conatainer, vector <Mat> &output_im_container, int number_of_threads, vector <string> &name_to_save)
 {
 	for (int j = 0; (j)* number_of_threads < image_name.size(); j++)
 	{
@@ -125,7 +127,7 @@ void load_then_process_mt(vector <string> &image_name, string &input_dir_path, v
 			if (i >= image_name.size() - 2)
 				break;
 			wczytaj_obraz(image_name[i + 2], input_dir_path, input_im_conatainer);
-			tt[i - (number_of_threads * j)] = thread(przetworzobraz, ref(input_im_conatainer[i]), ref(output_im_container));
+			tt[i - (number_of_threads * j)] = thread(przetworzobraz, ref(input_im_conatainer[i]), ref(output_im_container),ref(name_to_save),ref(image_name[i+2]));
 		}
 		for (int i = number_of_threads * j; i < number_of_threads + (number_of_threads * j); i++)
 		{
@@ -174,7 +176,7 @@ void save_mt(vector <Mat> & output_im_container, vector <string> & image_name, s
 		for (int i = 0; i < number_of_threads; i++)
 		{
 			if (i + (j * 8) < number_of_pictures)
-				tt[i] = thread(save_modified_picture, ref(output_im_container[i]), ref(image_name[(i + 2) + j * 8]), ref(output_dir_path));
+				tt[i] = thread(save_modified_picture, ref(output_im_container[i+ j*8]), ref(image_name[i + j * 8]), ref(output_dir_path));
 			else
 				break;
 		}

@@ -1,6 +1,13 @@
 #ifndef functions_defs_h
 #define functions_defs_h
-
+/*
+#ifdef _DEBUG
+#  define _CRTDBG_MAP_ALLOC
+#  define _CRTDBG_MAP_ALLOC_NEW
+#  include <crtdbg.h>
+#  include <assert.h>
+#endif
+*/
 #include <opencv2\opencv.hpp>
 #include <opencv/highgui.h>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -19,14 +26,14 @@ using namespace std;
 using namespace cv;
 
 void wczytaj_obraz(const string nazwa_obrazu, const string sciezka_katalogu_obrazu, vector <Mat> & input_im_conatainer);
-void przetworzobraz(Mat & input_image, vector <Mat> & output_im_container); //przetwarza obraz metod¹ uœredniania jasnoœci
+void przetworzobraz(Mat & input_image, vector <Mat> & output_im_container, vector <string> & name_to_save, string &image_name); //przetwarza obraz metod¹ uœredniania jasnoœci
 void zmienrozmiar(Mat& input_mat, Mat& output_mat, int width, int height);
 void find_file_names(vector <string> &image_paths, string input_dir);
 void make_black_square(Mat& matrix, int size);
 void calculate_collage_dims(int & horizontal, int & vertical, double number_of_elements);
 void save_modified_picture(Mat &picture, const string &filename, const string &output_dir_path);
 void load_ini(string &input_dir_path, string &output_dir_path);
-void load_then_process_mt(vector <string> &image_name, string &input_dir_path, vector <Mat> &input_im_conatainer, vector <Mat> &output_im_container, int number_of_threads);
+void load_then_process_mt(vector <string> &image_name, string &input_dir_path, vector <Mat> &input_im_conatainer, vector <Mat> &output_im_container, int number_of_threads, vector <string> &name_to_save);
 void make_collage(Mat & collage, Mat & black_square, vector <Mat> & output_im_container, int horizontal, int vertical, int number_of_pictures);
 void save_mt(vector <Mat> & output_im_container, vector <string> & image_name, string &output_dir_path, int number_of_threads, int number_of_pictures);
 #endif // !functions_defs_h
